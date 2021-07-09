@@ -95,9 +95,11 @@ GtkTreeDataStore class >> gDefineTreeStoreInterface: iface [
 	iface iter_children: (GCallback 
 		signature: #(gboolean (void *tree_model, void *iter, void *parent)) 
 		block: [ :tree_model :iter :parent | 
-			(self gInstance: tree_model) 
-				iterChildren: (GtkTreeIter fromHandle: parent) 
-				iter: (GtkTreeIter fromHandle: iter) ]).
+			(self gInstanceSafe: tree_model) 
+				ifNotNil: [ :inst |
+					inst iterChildren: (GtkTreeIter fromHandle: parent) 
+						iter: (GtkTreeIter fromHandle: iter) ]
+				ifNil: [ false ]]).
 	iface iter_has_child: (GCallback 
 		signature: #(gboolean (void *tree_model, void *iter)) 
 		block: [ :tree_model :iter | 

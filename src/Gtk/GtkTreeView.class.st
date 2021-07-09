@@ -123,6 +123,7 @@ GtkTreeView >> beSingleSelectionMode [
 GtkTreeView >> cleanupAfterReplacing [
 
 	self model roots: #() .
+	self model clear.
 	self disconnect: #destroy.
 		
 	listStore prepareToDisconnect.

@@ -60,6 +60,12 @@ GtkTreeStore >> appendNew [
 	^ (GtkTreeIter on: self) appendNewRoot
 ]
 
+{ #category : #testing }
+GtkTreeStore >> clear [
+
+	^ self ffiCall: #(void gtk_tree_store_clear(self))
+]
+
 { #category : #private }
 GtkTreeStore >> getString: buffer column: column iter: iter [
 	
